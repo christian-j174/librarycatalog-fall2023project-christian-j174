@@ -4,29 +4,36 @@ import java.time.LocalDate;
 
 public class Book {
 	
+	//Properties
+	int id;
+	String title;
+	String author;
+	String genre;
+	
+	
 	public int getId() {
-		return -10;
+		return this.id;
 	}
 	public void setId(int id) {
-		
+		this.id = id;
 	}
 	public String getTitle() {
-		return "";
+		return this.title;
 	}
 	public void setTitle(String title) {
-		
+		this.title = title;
 	}
 	public String getAuthor() {
-		return "";
+		return this.author;
 	}
 	public void setAuthor(String author) {
-		
+		this.author = author;
 	}
 	public String getGenre() {
-		return "";
+		return this.genre;
 	}
 	public void setGenre(String genre) {
-		
+		this.genre = genre;
 	}
 	public LocalDate getLastCheckOut() {
 		return null;
