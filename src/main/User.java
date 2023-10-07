@@ -10,6 +10,12 @@ public class User {
 	int id;
 	String name;
 	List<Book> books;
+
+	User(int id, String name, List<Book> books) {
+		this.id = id;
+		this.name = name;
+		this.books = books;
+	}
 	
 	public int getId() {
 		return this.id;
