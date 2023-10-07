@@ -1,5 +1,6 @@
 package main;
 
+import data_structures.ArrayList;
 import interfaces.List;
 
 public class User {
@@ -31,7 +32,13 @@ public class User {
 	}
 
 	public void setCheckedOutList(List<Book> checkedOutList) {
-        this.books = checkedOutList;
+		if (checkedOutList == null) {
+			throw new IllegalArgumentException("The checkedOutList cannot be null");
+		}
+		
+        this.books = new ArrayList<>();
+		for(Book book: checkedOutList)
+			books.add(book);
 	}
 	
 }
