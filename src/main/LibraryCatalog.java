@@ -21,7 +21,37 @@ public class LibraryCatalog {
 		
 	}
 	private List<Book> getBooksFromFiles() throws IOException {
-		return null;
+		List<Book> books = new ArrayList<>();
+		String csvFile = "data/catalog.csv"; // Relative Path
+		String line;
+		String csvSplitBy = ",";
+
+		try(BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+			br.readLine(); //skip the first line 
+
+			while ((line = br.readLine()) != null) {
+				String[] values = line.split(csvSplitBy);
+// ID,Title,Author,Genre,Last Checkout Date,Checked Out
+
+
+				int id = Integer.parseInt(values[0].trim());
+				String title = values[1];
+				String author = values[2];
+				String genre = values[3];
+				LocalDate lastCheckOut = LocalDate.ofYearDay(2023, 100);
+				boolean isCheckedOut  = true;
+
+				books.add(new Book(id, title, author, genre, lastCheckOut, isCheckedOut));
+			}
+			
+		} catch (IOException e) {
+				e.printStackTrace();
+				throw e; 
+		}
+
+
+
+		return books;
 	}
 	
 	private List<User> getUsersFromFiles() throws IOException {
@@ -66,8 +96,9 @@ public class LibraryCatalog {
 
 
 	public List<Book> getBookCatalog() {
-		return null;
+		return getBookCatalog();
 	}
+	
 	public List<User> getUsers() {
 		try {
 			return getUsersFromFiles();
