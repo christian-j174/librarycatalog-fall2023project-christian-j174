@@ -21,29 +21,25 @@ public class LibraryCatalog {
 		
 	}
 	private List<Book> getBooksFromFiles() throws IOException {
-		List<Book> books = new ArrayList<>();
-		String csvFile = "data/catalog.csv"; // Relative Path
-		String line;
-		String csvSplitBy = ",";
+        List<Book> books = new ArrayList<>();
+        String line;
+        String csvSplitBy = ",";
 
-		try(BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
-			br.readLine(); //skip the first line 
+        try (BufferedReader br = new BufferedReader(new FileReader("data/user.csv"))) {
+            br.readLine(); // skip the header line
 
-			while ((line = br.readLine()) != null) {
-				String[] values = line.split(csvSplitBy);
-// ID,Title,Author,Genre,Last Checkout Date,Checked Out
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(csvSplitBy);
 
+                int bookId = Integer.parseInt(values[0].trim());
+                String title = values[1].trim();
+                String author = values[2].trim();
+                String genre = values[3].trim();
+                LocalDate lastCheckOut = LocalDate.parse(values[4].trim());
+                boolean isCheckedOut = Boolean.parseBoolean(values[5].trim());
 
-				int id = Integer.parseInt(values[0].trim());
-				String title = values[1];
-				String author = values[2];
-				String genre = values[3];
-				LocalDate lastCheckOut = LocalDate.ofYearDay(2023, 100);
-				boolean isCheckedOut  = true;
-
-				books.add(new Book(id, title, author, genre, lastCheckOut, isCheckedOut));
+                books.add(new Book(bookId, title, author, genre, lastCheckOut, isCheckedOut));
 			}
-			
 		} catch (IOException e) {
 				e.printStackTrace();
 				throw e; 
@@ -96,9 +92,15 @@ public class LibraryCatalog {
 
 
 	public List<Book> getBookCatalog() {
-		return getBookCatalog();
+		try {
+			return getBooksFromFiles();
+		} catch (IOException e){
+			e.printStackTrace();
+			return new ArrayList<>();
+		}
+		
 	}
-	
+
 	public List<User> getUsers() {
 		try {
 			return getUsersFromFiles();
@@ -164,6 +166,10 @@ public class LibraryCatalog {
 		 * 
 		 * PLACE CODE HERE
 		 */
+
+		 for(Book book: getBookCatalog()){
+			output += book.getTitle() + "\n";
+		 }
 		
 //		
 //		output += "====================================================\n";
