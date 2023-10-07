@@ -9,16 +9,20 @@ public class Book {
 	String title;
 	String author;
 	String genre;
+	LocalDate lastCheckOut;
+	boolean isCheckedOut;
 	
 	// Constructors
 	
 	Book(){}
 	
-	Book(int id, String title, String author, String genre){
+	Book(int id, String title, String author, String genre, LocalDate lastCheckOut, boolean isCheckedOut){
 		this.id = id;
 		this.title = title;
 		this.author = author;
 		this.genre = genre; 
+		this.lastCheckOut = lastCheckOut;
+		this.isCheckedOut = isCheckedOut; 
 		
 	}
 	
@@ -48,16 +52,16 @@ public class Book {
 		this.genre = genre;
 	}
 	public LocalDate getLastCheckOut() {
-		return null;
+		return this.lastCheckOut;
 	}
 	public void setLastCheckOut(LocalDate lastCheckOut) {
-		
+		this.lastCheckOut = lastCheckOut;
 	}
 	public boolean isCheckedOut() {
-		return false;
+		return this.isCheckedOut;
 	}
 	public void setCheckedOut(boolean checkedOut) {
-		
+		this.isCheckedOut = checkedOut;
 	}
 	
 	@Override
@@ -69,7 +73,9 @@ public class Book {
 		 * 
 		 * Both the title and author are in uppercase.
 		 */
-		return "";
+		String printify = this.getTitle() + " By " + this.getAuthor();
+		printify = printify.toUpperCase();
+		return printify;
 	}
 	public float calculateFees() {
 		/*
