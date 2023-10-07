@@ -31,7 +31,7 @@ public class User {
 	}
 
 	public void setCheckedOutList(List<Book> checkedOutList) {
-		// this.books = checkedOutList;
+        this.books = checkedOutList;
 	}
 	
 }

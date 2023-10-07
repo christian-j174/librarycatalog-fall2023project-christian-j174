@@ -6,9 +6,9 @@ import static org.junit.Assert.fail;
 import java.io.IOException;
 import java.time.LocalDate;
 
-
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import interfaces.List;
 import main.Book;
@@ -35,7 +35,7 @@ public class StudentTester {
 	}
 	@Test
 	public void testIfConstructedCorrectly() {
-		assertTrue("Failed to create Bokk and User Lists correctly.", LC.getBookCatalog().size() == 50 && LC.getUsers().size() == 30);
+		assertTrue("Failed to create Book and User Lists correctly.", LC.getBookCatalog().size() == 50 && LC.getUsers().size() == 30);
 	}
 	@Test
 	public void testAddBook() {
@@ -44,7 +44,7 @@ public class StudentTester {
 		
 		Book epicBook1 = findBookById(LC.getBookCatalog(), 51);
 		if(epicBook1 == null)
-			fail("Didn't add the book {51, MyPersonal Biography, G Bonilla, Classics} to the List");
+			fail("Didn't add the book {51, My Personal Biography, G Bonilla, Classics} to the List");
 		Book epicBook2 = findBookById(LC.getBookCatalog(), 52);
 		if(epicBook2 == null)
 			fail("Didn't add the book {52, Coder's Guide to Failing, G Bonilla, Adventure} to the List");
@@ -65,22 +65,22 @@ public class StudentTester {
 	public void testCheckOutBook() {
 		boolean success = LC.checkOutBook(19);
 		boolean failure = !LC.checkOutBook(20);
-		assertTrue("Failed to checkout a book that isn't check out (id = 19) should be true"
-				+ "or failed to not checkout a book that is already checked out (id = 20) should be false", success && failure);
+		assertTrue("Failed to checkout a book that ISN'T checked out (id = 19). Should return true"
+				+ "or failed to not checkout a book that IS already checked out (id = 20). Should return false", success && failure);
 	}
 	@Test
 	public void testReturnBook() {
 		boolean success = LC.returnBook(20);
 		boolean failure = !LC.returnBook(19);
-		assertTrue("Failed to return a book that is check out (id = 20) should be true "
-				+ "or failed to not return a book that isn't checked out (id = 19) should be false", success && failure);
+		assertTrue("Failed to return a book that IS currently checked out (id = 20) should be true "
+				+ "or failed to not return a book that ISN'T checked out (id = 19) should be false", success && failure);
 	}
 	@Test
 	public void testBookAvailability() {
-		boolean success = !LC.getBookAvailability(19);
-		boolean failure = LC.getBookAvailability(20);
-		assertTrue("Failed to return that book is available (id = 19) should be true "
-				+ "or failed to return that book isn;t available (id=20) should be false", success && failure);
+		boolean success = LC.getBookAvailability(19);
+		boolean failure = !LC.getBookAvailability(20);
+		assertTrue("Failed to return that book IS available (id = 19) should be true "
+				+ "or failed to return that book ISN'T available (id=20) should be false", success && failure);
 	}
 	@Test
 	public void testBookCount() {
@@ -95,7 +95,7 @@ public class StudentTester {
 	@Test
 	public void testBookFees() {
 		Book book = this.findBookById(LC.getBookCatalog(), 36);
-		assertTrue("Failed to calculate expected fees for book id = 36, expected 289.50 in fees.", book.calculateFees() == 389.5);
+		assertTrue("Failed to calculate expected fees for book id = 36, expected 389.50 in fees.", book.calculateFees() == 389.5);
 	}
 	/*
 	 * BONUS TESTERS
