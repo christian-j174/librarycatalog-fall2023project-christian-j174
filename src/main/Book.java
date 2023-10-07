@@ -15,6 +15,10 @@ public class Book {
 	// Constructors
 	
 	Book(){}
+
+	Book(int id){
+		this.id = id;
+	}
 	
 	Book(int id, String title, String author, String genre, LocalDate lastCheckOut, boolean isCheckedOut){
 		this.id = id;
