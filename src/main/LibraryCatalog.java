@@ -109,9 +109,11 @@ public class LibraryCatalog {
 			return new ArrayList<>();
 		}
 	}
+
 	public void addBook(String title, String author, String genre) {
 		return;
 	}
+
 	public void removeBook(int id) {
 		return;
 	}	
@@ -119,6 +121,7 @@ public class LibraryCatalog {
 	public boolean checkOutBook(int id) {
 		return true;
 	}
+
 	public boolean returnBook(int id) {
 		return true;
 	}
@@ -126,9 +129,17 @@ public class LibraryCatalog {
 	public boolean getBookAvailability(int id) {
 		return true;
 	}
+
 	public int bookCount(String title) {
-		return 1000;
+		int counter = 0;
+		for(Book book: getBookCatalog()){
+			if(book.getTitle().equals(title))
+				counter++;
+		}
+		return counter;
 	}
+
+	
 	public void generateReport() throws IOException {
 		
 		String output = "\t\t\t\tREPORT\n\n";
@@ -190,7 +201,10 @@ public class LibraryCatalog {
 		 * 
 		 * PLACE CODE HERE!
 		 */
+		
+		output += "Testing 101" + "\n";
 
+		output += bookCount("The Catcher in the Rye") + "\n";
 			
 		output += "====================================================\n";
 //		output += "\t\t\t\tTOTAL DUE\t$" + (/*Place here the total amount of money owed to the library.*/) + "\n\n\n";
