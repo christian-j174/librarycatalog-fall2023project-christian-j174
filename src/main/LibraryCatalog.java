@@ -21,17 +21,93 @@ public class LibraryCatalog {
 		
 	}
 	private List<Book> getBooksFromFiles() throws IOException {
-		return null;
+        List<Book> books = new ArrayList<>();
+        String line;
+        String csvSplitBy = ",";
+
+        try (BufferedReader br = new BufferedReader(new FileReader("data/catalog.csv"))) {
+            br.readLine(); // skip the header line
+
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(csvSplitBy);
+
+                int bookId = Integer.parseInt(values[0].trim());
+                String title = values[1].trim();
+                String author = values[2].trim();
+                String genre = values[3].trim();
+                LocalDate lastCheckOut = LocalDate.parse(values[4].trim());
+                boolean isCheckedOut = Boolean.parseBoolean(values[5].trim());
+
+                books.add(new Book(bookId, title, author, genre, lastCheckOut, isCheckedOut));
+			}
+		} catch (IOException e) {
+				e.printStackTrace();
+				throw e; 
+		}
+
+
+
+		return books;
 	}
 	
 	private List<User> getUsersFromFiles() throws IOException {
-		return null;
+		List<User> users = new ArrayList<>();
+		String csvFile = "data/user.csv"; // Relative Path
+		String line;
+		String csvSplitBy = ",";
+
+		try(BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+			br.readLine(); //skip the first line 
+
+			while ((line = br.readLine()) != null) {
+				String[] values = line.split(csvSplitBy);
+
+				int userId = Integer.parseInt(values[0].trim());
+				String userName = values[1].trim();
+				List<Book> userBooks = new ArrayList<>();
+
+				//add books 
+
+				// check inside the curly braces and verify that is not empty
+				if(values.length >2 && !values[2].trim().isEmpty()) {
+					String[] bookIds = values[2].trim().replace("{", "").replace("}", "").split("\\s+"); // simplify this
+					for (String bookId: bookIds){
+						userBooks.add(new Book(Integer.parseInt(bookId)));
+					}
+				} 
+
+				users.add(new User(userId, userName, userBooks));
+
+			}
+			
+		} catch (IOException e) {
+				e.printStackTrace();
+				throw e; 
+		}
+
+
+
+		return users;
 	}
+
+
 	public List<Book> getBookCatalog() {
-		return null;
+		try {
+			return getBooksFromFiles();
+		} catch (IOException e){
+			e.printStackTrace();
+			return new ArrayList<>();
+		}
+		
 	}
+
 	public List<User> getUsers() {
-		return null;
+		try {
+			return getUsersFromFiles();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return new ArrayList<>();
+		}
 	}
 	public void addBook(String title, String author, String genre) {
 		return;
@@ -69,13 +145,13 @@ public class LibraryCatalog {
 		 * How you do the count is up to you. You can make a method, use the searchForBooks()
 		 * function or just do the count right here.
 		 */
-		output += "Adventure\t\t\t\t\t" + (/*Place here the amount of adventure books*/) + "\n";
-		output += "Fiction\t\t\t\t\t\t" + (/*Place here the amount of fiction books*/) + "\n";
-		output += "Classics\t\t\t\t\t" + (/*Place here the amount of classics books*/) + "\n";
-		output += "Mystery\t\t\t\t\t\t" + (/*Place here the amount of mystery books*/) + "\n";
-		output += "Science Fiction\t\t\t\t\t" + (/*Place here the amount of science fiction books*/) + "\n";
-		output += "====================================================\n";
-		output += "\t\t\tTOTAL AMOUNT OF BOOKS\t" + (/*Place here the total number of books*/) + "\n\n";
+//		output += "Adventure\t\t\t\t\t" + (/*Place here the amount of adventure books*/) + "\n";
+//		output += "Fiction\t\t\t\t\t\t" + (/*Place here the amount of fiction books*/) + "\n";
+//		output += "Classics\t\t\t\t\t" + (/*Place here the amount of classics books*/) + "\n";
+//		output += "Mystery\t\t\t\t\t\t" + (/*Place here the amount of mystery books*/) + "\n";
+//		output += "Science Fiction\t\t\t\t\t" + (/*Place here the amount of science fiction books*/) + "\n";
+//		output += "====================================================\n";
+//		output += "\t\t\tTOTAL AMOUNT OF BOOKS\t" + (/*Place here the total number of books*/) + "\n\n";
 		
 		/*
 		 * This part prints the books that are currently checked out
@@ -89,11 +165,10 @@ public class LibraryCatalog {
 		 * expected format.
 		 * 
 		 * PLACE CODE HERE
-		 */
-		
-		
-		output += "====================================================\n";
-		output += "\t\t\tTOTAL AMOUNT OF BOOKS\t" (/*Place here the total number of books that are checked out*/) + "\n\n";
+		 */		
+//		
+//		output += "====================================================\n";
+//		output += "\t\t\tTOTAL AMOUNT OF BOOKS\t" (/*Place here the total number of books that are checked out*/) + "\n\n";
 		
 		
 		/*
@@ -118,7 +193,7 @@ public class LibraryCatalog {
 
 			
 		output += "====================================================\n";
-		output += "\t\t\t\tTOTAL DUE\t$" + (/*Place here the total amount of money owed to the library.*/) + "\n\n\n";
+//		output += "\t\t\t\tTOTAL DUE\t$" + (/*Place here the total amount of money owed to the library.*/) + "\n\n\n";
 		output += "\n\n";
 		System.out.println(output);// You can use this for testing to see if the report is as expected.
 		
