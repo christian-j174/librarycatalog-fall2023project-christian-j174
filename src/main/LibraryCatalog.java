@@ -127,7 +127,11 @@ public class LibraryCatalog {
 	}
 	
 	public boolean getBookAvailability(int id) {
-		return true;
+		for(Book book: getBookCatalog()){
+			if(book.getId() == id && !(book.isCheckedOut()))
+				return true;
+		}
+		return false;
 	}
 
 	public int bookCount(String title) {
@@ -203,8 +207,6 @@ public class LibraryCatalog {
 		 */
 		
 		output += "Testing 101" + "\n";
-
-		output += bookCount("The Catcher in the Rye") + "\n";
 			
 		output += "====================================================\n";
 //		output += "\t\t\t\tTOTAL DUE\t$" + (/*Place here the total amount of money owed to the library.*/) + "\n\n\n";
