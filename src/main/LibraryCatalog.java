@@ -25,7 +25,7 @@ public class LibraryCatalog {
         String line;
         String csvSplitBy = ",";
 
-        try (BufferedReader br = new BufferedReader(new FileReader("data/user.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("data/catalog.csv"))) {
             br.readLine(); // skip the header line
 
             while ((line = br.readLine()) != null) {
@@ -165,12 +165,7 @@ public class LibraryCatalog {
 		 * expected format.
 		 * 
 		 * PLACE CODE HERE
-		 */
-
-		 for(Book book: getBookCatalog()){
-			output += book.getTitle() + "\n";
-		 }
-		
+		 */		
 //		
 //		output += "====================================================\n";
 //		output += "\t\t\tTOTAL AMOUNT OF BOOKS\t" (/*Place here the total number of books that are checked out*/) + "\n\n";
