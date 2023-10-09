@@ -119,11 +119,35 @@ public class LibraryCatalog {
 	}	
 	
 	public boolean checkOutBook(int id) {
-		return true;
+
+		for(Book book: getBookCatalog()){
+			if(book.getId() == id){
+				if(!book.isCheckedOut()){
+					book.setCheckedOut(true);
+					book.setLastCheckOut(LocalDate.parse("2023-09-15"));
+					return true;
+				}
+				if(book.isCheckedOut())
+					return false;
+			}
+		} return false;
+
 	}
 
 	public boolean returnBook(int id) {
-		return true;
+		for(Book book: getBookCatalog()){
+			if(book.getId() == id){
+
+				if(book.isCheckedOut()){
+					book.setCheckedOut(false);
+					return true;
+				}
+		
+				if(!book.isCheckedOut())
+					return false;
+			}
+		}
+		return false;
 	}
 	
 	public boolean getBookAvailability(int id) {
@@ -206,7 +230,9 @@ public class LibraryCatalog {
 		 * PLACE CODE HERE!
 		 */
 		
-		output += "Testing 101" + "\n";
+		output += "Testing Return Books" + "\n";
+
+
 			
 		output += "====================================================\n";
 //		output += "\t\t\t\tTOTAL DUE\t$" + (/*Place here the total amount of money owed to the library.*/) + "\n\n\n";
