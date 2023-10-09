@@ -8,6 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 
+import javax.xml.catalog.Catalog;
+
 import data_structures.ArrayList;
 import data_structures.DoublyLinkedList;
 import data_structures.SinglyLinkedList;
@@ -20,6 +22,9 @@ public class LibraryCatalog {
 	public LibraryCatalog() throws IOException {
 		
 	}
+
+	List<Book> bookCatalog = getBookCatalog();
+
 	private List<Book> getBooksFromFiles() throws IOException {
         List<Book> books = new ArrayList<>();
         String line;
@@ -111,11 +116,30 @@ public class LibraryCatalog {
 	}
 
 	public void addBook(String title, String author, String genre) {
-		return;
+		int id;
+		int catalogSize = getBookCatalog().size();
+		LocalDate lastCheckOut = LocalDate.parse("2023-09-15");
+
+		// In case that we violate the initial 50 book, and avoid repeating the ID
+		if(catalogSize < 50){
+			id = catalogSize + 50;
+			return ;
+		}
+
+		id = catalogSize + 1;
+
+		bookCatalog.add(new Book(id, title, author, genre, lastCheckOut, false));
+
+		return ;
 	}
 
 	public void removeBook(int id) {
-		return;
+		for(Book book: bookCatalog){
+			if(book.getId() == id){
+				bookCatalog.remove(book);
+			}
+		}
+		return ;
 	}	
 	
 	public boolean checkOutBook(int id) {
@@ -231,6 +255,10 @@ public class LibraryCatalog {
 		 */
 		
 		output += "Testing Return Books" + "\n";
+		addBook("Chris el Mejor", "Christian", "Romance");
+		output += bookCatalog.size() + "\n";
+		removeBook(51);
+		output+= bookCatalog.size() + "\n";
 
 
 			
