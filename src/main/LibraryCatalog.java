@@ -255,10 +255,11 @@ public class LibraryCatalog {
 		 */
 		
 		output += "Testing Return Books" + "\n";
-		addBook("Chris el Mejor", "Christian", "Romance");
-		output += bookCatalog.size() + "\n";
-		removeBook(51);
-		output+= bookCatalog.size() + "\n";
+		
+		for(Book book: bookCatalog){
+			if(book.getId() == 50)
+				output += book.calculateFees() + "\n";
+		}
 
 
 			

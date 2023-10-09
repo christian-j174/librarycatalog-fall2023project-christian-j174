@@ -1,6 +1,7 @@
 package main;
 
 import java.time.LocalDate;
+import java.util.function.ToIntFunction;
 
 public class Book {
 	
@@ -85,6 +86,13 @@ public class Book {
 		/*
 		 * fee (if applicable) = base fee + 1.5 per additional day
 		 */
-		return -1000;
+		float fee = 0;
+		LocalDate today = LocalDate.parse("2023-09-15");
+		long daysPassed = today.toEpochDay() - getLastCheckOut().toEpochDay();
+
+		if(daysPassed > 31 && isCheckedOut()){
+			fee = (float) (10 + (1.50 * (daysPassed - 31)));
+		}
+		return fee;
 	}
 }
