@@ -23,7 +23,8 @@ public class LibraryCatalog {
 		
 	}
 
-	List<Book> bookCatalog = getBookCatalog();
+	List<Book> bookCatalog = getBookCatalog(); // get the initial data from csv bookCatalog
+	List<User> userList = getUsers();  // get the initial data from csv User
 
 	private List<Book> getBooksFromFiles() throws IOException {
         List<Book> books = new ArrayList<>();
@@ -144,7 +145,7 @@ public class LibraryCatalog {
 	
 	public boolean checkOutBook(int id) {
 
-		for(Book book: getBookCatalog()){
+		for(Book book: bookCatalog){
 			if(book.getId() == id){
 				if(!book.isCheckedOut()){
 					book.setCheckedOut(true);
@@ -159,7 +160,7 @@ public class LibraryCatalog {
 	}
 
 	public boolean returnBook(int id) {
-		for(Book book: getBookCatalog()){
+		for(Book book: bookCatalog){
 			if(book.getId() == id){
 
 				if(book.isCheckedOut()){
@@ -175,7 +176,7 @@ public class LibraryCatalog {
 	}
 	
 	public boolean getBookAvailability(int id) {
-		for(Book book: getBookCatalog()){
+		for(Book book: bookCatalog){
 			if(book.getId() == id && !(book.isCheckedOut()))
 				return true;
 		}
@@ -184,7 +185,7 @@ public class LibraryCatalog {
 
 	public int bookCount(String title) {
 		int counter = 0;
-		for(Book book: getBookCatalog()){
+		for(Book book: bookCatalog){
 			if(book.getTitle().equals(title))
 				counter++;
 		}
