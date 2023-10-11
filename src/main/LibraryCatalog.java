@@ -198,74 +198,87 @@ public class LibraryCatalog {
 		String output = "\t\t\t\tREPORT\n\n";
 		output += "\t\tSUMMARY OF BOOKS\n";
 		output += "GENRE\t\t\t\t\t\tAMOUNT\n";
-		/*
-		 * In this section you will print the amount of books per category.
-		 * 
-		 * Place in each parenthesis the specified count. 
-		 * 
-		 * Note this is NOT a fixed number, you have to calculate it because depending on the 
-		 * input data we use the numbers will differ.
-		 * 
-		 * How you do the count is up to you. You can make a method, use the searchForBooks()
-		 * function or just do the count right here.
-		 */
-//		output += "Adventure\t\t\t\t\t" + (/*Place here the amount of adventure books*/) + "\n";
-//		output += "Fiction\t\t\t\t\t\t" + (/*Place here the amount of fiction books*/) + "\n";
-//		output += "Classics\t\t\t\t\t" + (/*Place here the amount of classics books*/) + "\n";
-//		output += "Mystery\t\t\t\t\t\t" + (/*Place here the amount of mystery books*/) + "\n";
-//		output += "Science Fiction\t\t\t\t\t" + (/*Place here the amount of science fiction books*/) + "\n";
-//		output += "====================================================\n";
-//		output += "\t\t\tTOTAL AMOUNT OF BOOKS\t" + (/*Place here the total number of books*/) + "\n\n";
-		
-		/*
-		 * This part prints the books that are currently checked out
-		 */
-		output += "\t\t\tBOOKS CURRENTLY CHECKED OUT\n\n";
-		/*
-		 * Here you will print each individual book that is checked out.
-		 * 
-		 * Remember that the book has a toString() method. 
-		 * Notice if it was implemented correctly it should print the books in the 
-		 * expected format.
-		 * 
-		 * PLACE CODE HERE
-		 */		
-//		
-//		output += "====================================================\n";
-//		output += "\t\t\tTOTAL AMOUNT OF BOOKS\t" (/*Place here the total number of books that are checked out*/) + "\n\n";
-		
-		
-		/*
-		 * Here we will print the users the owe money.
-		 */
-		output += "\n\n\t\tUSERS THAT OWE BOOK FEES\n\n";
-		/*
-		 * Here you will print all the users that owe money.
-		 * The amount will be calculating taking into account 
-		 * all the books that have late fees.
-		 * 
-		 * For example if user Jane Doe has 3 books and 2 of them have late fees.
-		 * Say book 1 has $10 in fees and book 2 has $78 in fees.
-		 * 
-		 * You would print: Jane Doe\t\t\t\t\t$88.00
-		 * 
-		 * Notice that we place 5 tabs between the name and fee and 
-		 * the fee should have 2 decimal places.
-		 * 
-		 * PLACE CODE HERE!
-		 */
-		
-		output += "Testing Return Books" + "\n";
-		
+
+		int countAdeventure = 0;
+		int countFiction = 0;
+		int countClassics = 0;
+		int countMystery = 0;
+		int countScienceFiction = 0;
+		int totalBook = 0;
+
 		for(Book book: bookCatalog){
-			if(book.getId() == 50)
-				output += book.calculateFees() + "\n";
+			if(book.getGenre().equals("Adventure")){
+				countAdeventure++;
+				totalBook++;
+			}
+			else if(book.getGenre().equals("Fiction")){
+				countFiction++;
+				totalBook++;
+			}
+			else if(book.getGenre().equals("Classics")){
+				countClassics++;
+				totalBook++;
+			}
+			else if(book.getGenre().equals("Mystery")){
+				countMystery++;
+				totalBook++;
+			}
+			else if(book.getGenre().equals("Science Fiction")){
+				countScienceFiction++;
+				totalBook++;
+			}
+			
 		}
+
+		output += "Adventure\t\t\t\t\t" + (countAdeventure) + "\n";
+		output += "Fiction\t\t\t\t\t\t" + (countFiction) + "\n";
+		output += "Classics\t\t\t\t\t" + (countClassics) + "\n";
+		output += "Mystery\t\t\t\t\t\t" + (countMystery) + "\n";
+		output += "Science Fiction\t\t\t\t\t" + (countScienceFiction) + "\n";
+		output += "====================================================\n";
+		output += "\t\t\tTOTAL AMOUNT OF BOOKS\t" + (totalBook) + "\n\n";
+
+		
+		output += "\t\t\tBOOKS CURRENTLY CHECKED OUT\n\n";
+		int bookChecked = 0;
+		for(Book book: bookCatalog){
+			if(book.isCheckedOut()){
+				output += book.toString() + "\n";
+				bookChecked++;
+			}
+		}
+
+//		
+		output += "====================================================\n";
+		output += "\t\t\tTOTAL AMOUNT OF BOOKS\t" + (bookChecked) + "\n\n";
+		
+		
+
+		output += "\n\n\t\tUSERS THAT OWE BOOK FEES\n\n";
+
+
+		float totalDueGeneral = 0;
+		float totalDueUser = 0;
+		
+		for(User user: userList){
+			if(!user.getCheckedOutList().isEmpty()){
+				for(Book book: user.getCheckedOutList()){
+					totalDueUser += book.calculateFees();
+				}
+				output +=user.getName() +"\t\t\t\t\t"+ totalDueUser + "\n";
+				totalDueGeneral += totalDueUser;
+				totalDueUser = 0;
+			}
+		}
+		
+
+		
+
 
 
 			
 		output += "====================================================\n";
-//		output += "\t\t\t\tTOTAL DUE\t$" + (/*Place here the total amount of money owed to the library.*/) + "\n\n\n";
+		output += "\t\t\t\tTOTAL DUE\t$" + (totalDueGeneral) + "\n\n\n";
 		output += "\n\n";
 		System.out.println(output);// You can use this for testing to see if the report is as expected.
 		
