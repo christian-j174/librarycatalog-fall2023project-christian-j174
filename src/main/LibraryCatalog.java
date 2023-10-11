@@ -23,8 +23,9 @@ public class LibraryCatalog {
 		
 	}
 
-	List<Book> bookCatalog = getBookCatalog(); // get the initial data from csv bookCatalog
-	List<User> userList = getUsers();  // get the initial data from csv User
+	
+	List<Book> bookCatalog = getBooksFromFiles(); // get the initial data from csv bookCatalog
+	List<User> userList = getUsersFromFiles();  // get the initial data from csv User
 
 	private List<Book> getBooksFromFiles() throws IOException {
         List<Book> books = new ArrayList<>();
@@ -105,22 +106,24 @@ public class LibraryCatalog {
 
 
 	public List<Book> getBookCatalog() {
-		try {
-			return getBooksFromFiles();
-		} catch (IOException e){
-			e.printStackTrace();
-			return new ArrayList<>();
-		}
+		return bookCatalog;
+		// try {
+		// 	return getBooksFromFiles();
+		// } catch (IOException e){
+		// 	e.printStackTrace();
+		// 	return new ArrayList<>();
+		// }
 		
 	}
 
 	public List<User> getUsers() {
-		try {
-			return getUsersFromFiles();
-		} catch (IOException e) {
-			e.printStackTrace();
-			return new ArrayList<>();
-		}
+		return userList;
+		// try {
+		// 	return getUsersFromFiles();
+		// } catch (IOException e) {
+		// 	e.printStackTrace();
+		// 	return new ArrayList<>();
+		// }
 	}
 
 	public void addBook(String title, String author, String genre) {
@@ -197,6 +200,14 @@ public class LibraryCatalog {
 				counter++;
 		}
 		return counter;
+	}
+
+	 Book findBookById(List<Book> L, int id) {
+		for(Book b: L) {
+			if(b.getId() == id)
+				return b;
+		}
+		return null;
 	}
 
 	
@@ -286,14 +297,26 @@ public class LibraryCatalog {
 		output += "====================================================\n";
 		output += "\t\t\t\tTOTAL DUE\t$" + (totalDueGeneral) + "\n\n\n";
 		output += "\n\n";
+
+		output += "My Own Test\n";
+
+		output += bookCatalog.size() + "\n";
+		addBook("My Personal Biography", "G Bonilla", "Classics");
+		output += bookCatalog.size() + "\n";
+		Book epicBook1 = findBookById(getBookCatalog(), 51);
+		if(epicBook1 == null)
+			output += "Fail \n";
+
+
+
 		System.out.println(output);// You can use this for testing to see if the report is as expected.
 		
-		try(BufferedWriter writer = new BufferedWriter(new FileWriter("report/expected_report.txt"))){
-			writer.write(output);
-			writer.close();
-		}catch (IOException e) {
-			System.err.println("An IOException occurred: " + e.getMessage());
-		}
+		// try(BufferedWriter writer = new BufferedWriter(new FileWriter("report/expected_report.txt"))){
+		// 	writer.write(output);
+		// 	writer.close();
+		// }catch (IOException e) {
+		// 	System.err.println("An IOException occurred: " + e.getMessage());
+		// }
 
 		
 	}
