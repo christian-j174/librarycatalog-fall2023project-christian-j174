@@ -16,9 +16,17 @@ import data_structures.SinglyLinkedList;
 import interfaces.FilterFunction;
 import interfaces.List;
 
+/**
+ * Reperesents the catalog of the library Westside Public Library’s IT Department.
+ * Its purpose is to maintaining records of books and users.
+ */
 public class LibraryCatalog {
 	
-		
+	/**
+	 * Construcr a new library Catalog, initializing books and users
+	 * records from the initial data provided on the format csv
+	 * @throws IOException if there is an issue reading the data files
+	 */
 	public LibraryCatalog() throws IOException {
 		
 	}
@@ -27,6 +35,12 @@ public class LibraryCatalog {
 	List<Book> bookCatalog = getBooksFromFiles(); // get the initial data from csv bookCatalog
 	List<User> userList = getUsersFromFiles();  // get the initial data from csv User
 
+
+	/**
+	 * Reads and returns the list of books from a csv file
+	 * @return the list of books
+	 * @throws IOException if there any isue reading the file
+	 */
 	private List<Book> getBooksFromFiles() throws IOException {
         List<Book> books = new ArrayList<>();
         String line;
@@ -59,6 +73,13 @@ public class LibraryCatalog {
 		return books;
 	}
 	
+
+    /**
+     * Reads and returns the list of users from a csv file.
+     *
+     * @return the list of users
+     * @throws IOException if there is an issue reading the csv file
+     */
 	private List<User> getUsersFromFiles() throws IOException {
 		List<User> users = new ArrayList<>();
 		String csvFile = "data/user.csv"; // Relative Path
@@ -75,7 +96,6 @@ public class LibraryCatalog {
 				String userName = values[1].trim();
 				List<Book> userBooks = new ArrayList<>();
 
-				//add books 
 
 				// check inside the curly braces and verify that is not empty
 				if(values.length >2 && !values[2].trim().isEmpty()) {
@@ -106,14 +126,33 @@ public class LibraryCatalog {
 	}
 
 
+	/**
+     * Returns the list of books in the catalog.
+     *
+     * @return the book catalog
+     */
 	public List<Book> getBookCatalog() {
 		return bookCatalog;	
 	}
 
+
+    /**
+     * Returns the list of users.
+     *
+     * @return the user list
+     */
 	public List<User> getUsers() {
 		return userList;
 	}
 
+
+    /**
+     * Adds a new book to the catalog with the given title, author, and genre.
+     *
+     * @param title  the title of the book
+     * @param author the author of the book
+     * @param genre  the genre of the book
+     */
 	public void addBook(String title, String author, String genre) {
 		int id;
 		int catalogSize = bookCatalog.size(); // fix this 
@@ -125,6 +164,12 @@ public class LibraryCatalog {
 		return ;
 	}
 
+
+    /**
+     * Removes a book from the catalog by its ID.
+     *
+     * @param id the ID of the book to be removed
+     */
 	public void removeBook(int id) {
 		for(Book book: bookCatalog){
 			if(book.getId() == id){
@@ -134,6 +179,13 @@ public class LibraryCatalog {
 		return ;
 	}	
 	
+
+    /**
+     * Attempts to check out a book by its ID.
+     *
+     * @param id the ID of the book to be checked out
+     * @return true if the book was successfully checked out, false otherwise
+     */
 	public boolean checkOutBook(int id) {
 
 		for(Book book: bookCatalog){
@@ -150,6 +202,11 @@ public class LibraryCatalog {
 
 	}
 
+	/**
+	 * 
+	 * @param id of the book to be returned to the library
+	 * @return true  if it was successfully returned, false if wasn't checked out or the book doesn't exist.
+	 */
 	public boolean returnBook(int id) {
 		for(Book book: bookCatalog){
 			if(book.getId() == id){
@@ -166,6 +223,12 @@ public class LibraryCatalog {
 		return false;
 	}
 	
+
+	/**
+	 * 
+	 * @param id of the book to verify availability
+	 * @return returns whether the book of the given id is available for check-out.
+	 */
 	public boolean getBookAvailability(int id) {
 		for(Book book: bookCatalog){
 			if(book.getId() == id && !(book.isCheckedOut()))
@@ -174,6 +237,11 @@ public class LibraryCatalog {
 		return false;
 	}
 
+	/**
+	 * 
+	 * @param title of the book 
+	 * @return how many books of the same title are present in the catalog.
+	 */
 	public int bookCount(String title) {
 		int counter = 0;
 		for(Book book: bookCatalog){
@@ -183,6 +251,13 @@ public class LibraryCatalog {
 		return counter;
 	}
 
+
+	/**
+	 * 
+	 * @param L list of books to search for an specific id
+	 * @param id of the book to search
+	 * @return the book with the specific id, else return null
+	 */
 	 Book findBookById(List<Book> L, int id) {
 		for(Book b: L) {
 			if(b.getId() == id)
@@ -191,7 +266,15 @@ public class LibraryCatalog {
 		return null;
 	}
 
-	
+    /**
+     * Generates a report(.txt) of the current state of the library
+	 * That includes:
+	 * 1.Summary of Books
+	 * 2.Books currently checked out
+	 * 3.Users that owe book fees
+     *
+     * @throws IOException if there is an issue writing the report to a file
+     */
 	public void generateReport() throws IOException {
 
 		String output = "\t\t\t\tREPORT\n\n";
