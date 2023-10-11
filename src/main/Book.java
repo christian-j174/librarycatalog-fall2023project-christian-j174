@@ -73,6 +73,14 @@ public class Book {
 		return printify;
 	}
 
+
+    /**
+     * Calculates the fees due for the book if it has been checked out for more than
+     * a specified period.
+     *
+     * @return The fee due for the book, or 0 if the book is not checked out or is within
+     * the allowed checkout period
+     */
 	public float calculateFees() {
 		if(!isCheckedOut())
 			return 0;
