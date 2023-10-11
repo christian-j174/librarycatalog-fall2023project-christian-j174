@@ -77,8 +77,15 @@ public class LibraryCatalog {
 				// check inside the curly braces and verify that is not empty
 				if(values.length >2 && !values[2].trim().isEmpty()) {
 					String[] bookIds = values[2].trim().replace("{", "").replace("}", "").split("\\s+"); // simplify this
+					
+
 					for (String bookId: bookIds){
-						userBooks.add(new Book(Integer.parseInt(bookId)));
+						for(Book book: bookCatalog){
+							if(book.getId() == Integer.parseInt(bookId)){
+								userBooks.add(book);
+							}
+						}
+						//userBooks.add(new Book(Integer.parseInt(bookId)));
 					}
 				} 
 
@@ -194,7 +201,7 @@ public class LibraryCatalog {
 
 	
 	public void generateReport() throws IOException {
-		
+
 		String output = "\t\t\t\tREPORT\n\n";
 		output += "\t\tSUMMARY OF BOOKS\n";
 		output += "GENRE\t\t\t\t\t\tAMOUNT\n";
@@ -260,6 +267,7 @@ public class LibraryCatalog {
 		float totalDueGeneral = 0;
 		float totalDueUser = 0;
 		
+
 		for(User user: userList){
 			if(!user.getCheckedOutList().isEmpty()){
 				for(Book book: user.getCheckedOutList()){
@@ -270,11 +278,9 @@ public class LibraryCatalog {
 				totalDueUser = 0;
 			}
 		}
-		
 
 		
-
-
+	
 
 			
 		output += "====================================================\n";
@@ -282,13 +288,13 @@ public class LibraryCatalog {
 		output += "\n\n";
 		System.out.println(output);// You can use this for testing to see if the report is as expected.
 		
-		/*
-		 * Here we will write to the file.
-		 * 
-		 * The variable output has all the content we need to write to the report file.
-		 * 
-		 * PLACE CODE HERE!!
-		 */
+		try(BufferedWriter writer = new BufferedWriter(new FileWriter("report/expected_report.txt"))){
+			writer.write(output);
+			writer.close();
+		}catch (IOException e) {
+			System.err.println("An IOException occurred: " + e.getMessage());
+		}
+
 		
 	}
 	
