@@ -125,7 +125,7 @@ public class LibraryCatalog {
 
 	public void addBook(String title, String author, String genre) {
 		int id;
-		int catalogSize = getBookCatalog().size();
+		int catalogSize = bookCatalog.size();
 		LocalDate lastCheckOut = LocalDate.parse("2023-09-15");
 
 		// In case that we violate the initial 50 book, and avoid repeating the ID
