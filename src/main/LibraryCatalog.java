@@ -31,8 +31,10 @@ public class LibraryCatalog {
         List<Book> books = new ArrayList<>();
         String line;
         String csvSplitBy = ",";
+		String csvFile = "data/catalog.csv"; // Relative Path
 
-        try (BufferedReader br = new BufferedReader(new FileReader("data/catalog.csv"))) {
+
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             br.readLine(); // skip the header line
 
             while ((line = br.readLine()) != null) {
@@ -86,7 +88,6 @@ public class LibraryCatalog {
 								userBooks.add(book);
 							}
 						}
-						//userBooks.add(new Book(Integer.parseInt(bookId)));
 					}
 				} 
 
@@ -106,37 +107,17 @@ public class LibraryCatalog {
 
 
 	public List<Book> getBookCatalog() {
-		return bookCatalog;
-		// try {
-		// 	return getBooksFromFiles();
-		// } catch (IOException e){
-		// 	e.printStackTrace();
-		// 	return new ArrayList<>();
-		// }
-		
+		return bookCatalog;	
 	}
 
 	public List<User> getUsers() {
 		return userList;
-		// try {
-		// 	return getUsersFromFiles();
-		// } catch (IOException e) {
-		// 	e.printStackTrace();
-		// 	return new ArrayList<>();
-		// }
 	}
 
 	public void addBook(String title, String author, String genre) {
 		int id;
-		int catalogSize = bookCatalog.size();
+		int catalogSize = bookCatalog.size(); // fix this 
 		LocalDate lastCheckOut = LocalDate.parse("2023-09-15");
-
-		// In case that we violate the initial 50 book, and avoid repeating the ID
-		if(catalogSize < 50){
-			id = catalogSize + 50;
-			return ;
-		}
-
 		id = catalogSize + 1;
 
 		bookCatalog.add(new Book(id, title, author, genre, lastCheckOut, false));
@@ -309,14 +290,14 @@ public class LibraryCatalog {
 
 
 
-		System.out.println(output);// You can use this for testing to see if the report is as expected.
+		System.out.println(output);
 		
-		// try(BufferedWriter writer = new BufferedWriter(new FileWriter("report/expected_report.txt"))){
-		// 	writer.write(output);
-		// 	writer.close();
-		// }catch (IOException e) {
-		// 	System.err.println("An IOException occurred: " + e.getMessage());
-		// }
+		try(BufferedWriter writer = new BufferedWriter(new FileWriter("report/expected_report.txt"))){
+			writer.write(output);
+			writer.close();
+		}catch (IOException e) {
+			System.err.println("An IOException occurred: " + e.getMessage());
+		}
 
 		
 	}

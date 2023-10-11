@@ -17,9 +17,6 @@ public class Book {
 	
 	Book(){}
 
-	Book(int id){
-		this.id = id;
-	}
 	
 	Book(int id, String title, String author, String genre, LocalDate lastCheckOut, boolean isCheckedOut){
 		this.id = id;
@@ -71,21 +68,12 @@ public class Book {
 	
 	@Override
 	public String toString() {
-		/*
-		 * This is supposed to follow the format
-		 * 
-		 * {TITLE} By {AUTHOR}
-		 * 
-		 * Both the title and author are in uppercase.
-		 */
 		String printify = this.getTitle() + " By " + this.getAuthor();
 		printify = printify.toUpperCase();
 		return printify;
 	}
+
 	public float calculateFees() {
-		/*
-		 * fee (if applicable) = base fee + 1.5 per additional day
-		 */
 		if(!isCheckedOut())
 			return 0;
 
