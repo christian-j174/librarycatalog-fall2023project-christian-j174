@@ -85,7 +85,7 @@ public class Book {
 		if(!isCheckedOut())
 			return 0;
 
-		float fee = 0;
+		float fee = 0.0f;
 		LocalDate today = LocalDate.parse("2023-09-15");
 		float daysPassed = today.toEpochDay() - getLastCheckOut().toEpochDay();
 
