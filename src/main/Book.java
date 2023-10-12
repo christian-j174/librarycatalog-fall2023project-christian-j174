@@ -1,6 +1,7 @@
 package main;
 
 import java.time.LocalDate;
+import java.util.function.ToIntFunction;
 
 public class Book {
 	
@@ -16,9 +17,6 @@ public class Book {
 	
 	Book(){}
 
-	Book(int id){
-		this.id = id;
-	}
 	
 	Book(int id, String title, String author, String genre, LocalDate lastCheckOut, boolean isCheckedOut){
 		this.id = id;
@@ -70,21 +68,30 @@ public class Book {
 	
 	@Override
 	public String toString() {
-		/*
-		 * This is supposed to follow the format
-		 * 
-		 * {TITLE} By {AUTHOR}
-		 * 
-		 * Both the title and author are in uppercase.
-		 */
 		String printify = this.getTitle() + " By " + this.getAuthor();
 		printify = printify.toUpperCase();
 		return printify;
 	}
+
+
+    /**
+     * Calculates the fees due for the book if it has been checked out for more than
+     * a specified period.
+     *
+     * @return The fee due for the book, or 0 if the book is not checked out or is within
+     * the allowed checkout period
+     */
 	public float calculateFees() {
-		/*
-		 * fee (if applicable) = base fee + 1.5 per additional day
-		 */
-		return -1000;
+		if(!isCheckedOut())
+			return 0;
+
+		float fee = 0;
+		LocalDate today = LocalDate.parse("2023-09-15");
+		float daysPassed = today.toEpochDay() - getLastCheckOut().toEpochDay();
+
+		if(daysPassed >= 31 && isCheckedOut()){
+			fee = (float) (10 + (1.50 * (daysPassed - 31)));
+		}
+		return fee;
 	}
 }
