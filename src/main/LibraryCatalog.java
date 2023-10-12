@@ -289,23 +289,23 @@ public class LibraryCatalog {
 		int totalBook = 0;
 
 		for(Book book: bookCatalog){
-			if(book.getGenre().equals("Adventure")){
+			if(book.getGenre().equalsIgnoreCase("Adventure")){
 				countAdeventure++;
 				totalBook++;
 			}
-			else if(book.getGenre().equals("Fiction")){
+			else if(book.getGenre().equalsIgnoreCase("Fiction")){
 				countFiction++;
 				totalBook++;
 			}
-			else if(book.getGenre().equals("Classics")){
+			else if(book.getGenre().equalsIgnoreCase("Classics")){
 				countClassics++;
 				totalBook++;
 			}
-			else if(book.getGenre().equals("Mystery")){
+			else if(book.getGenre().equalsIgnoreCase("Mystery")){
 				countMystery++;
 				totalBook++;
 			}
-			else if(book.getGenre().equals("Science Fiction")){
+			else if(book.getGenre().equalsIgnoreCase("Science Fiction")){
 				countScienceFiction++;
 				totalBook++;
 			}
@@ -313,9 +313,9 @@ public class LibraryCatalog {
 		}
 
 		output += "Adventure\t\t\t\t\t" + (countAdeventure) + "\n";
-		output += "Fiction\t\t\t\t\t\t" + (countFiction) + "\n";
+		output += "Fiction\t\t\t\t\t" + (countFiction) + "\n";
 		output += "Classics\t\t\t\t\t" + (countClassics) + "\n";
-		output += "Mystery\t\t\t\t\t\t" + (countMystery) + "\n";
+		output += "Mystery\t\t\t\t\t" + (countMystery) + "\n";
 		output += "Science Fiction\t\t\t\t\t" + (countScienceFiction) + "\n";
 		output += "====================================================\n";
 		output += "\t\t\tTOTAL AMOUNT OF BOOKS\t" + (totalBook) + "\n\n";
@@ -348,7 +348,7 @@ public class LibraryCatalog {
 				for(Book book: user.getCheckedOutList()){
 					totalDueUser += book.calculateFees();
 				}
-				output +=user.getName() +"\t\t\t\t\t"+ totalDueUser + "\n";
+				output +=user.getName() +"\t\t\t\t\t$"+String.format("%.2f", totalDueUser) + "\n";
 				totalDueGeneral += totalDueUser;
 				totalDueUser = 0;
 			}
@@ -359,23 +359,17 @@ public class LibraryCatalog {
 
 			
 		output += "====================================================\n";
-		output += "\t\t\t\tTOTAL DUE\t$" + (totalDueGeneral) + "\n\n\n";
+		output += "\t\t\t\tTOTAL DUE\t$" + String.format("%.2f", totalDueGeneral) + "\n\n\n";
 		output += "\n\n";
 
-		// output += "My Own Test\n";
+	//	output += "My Own Test\n";
 
-		// output += bookCatalog.size() + "\n";
-		// addBook("My Personal Biography", "G Bonilla", "Classics");
-		// output += bookCatalog.size() + "\n";
-		// Book epicBook1 = findBookById(getBookCatalog(), 51);
-		// if(epicBook1 == null)
-		// 	output += "Fail \n";
 
 
 
 		System.out.println(output);
 		
-		try(BufferedWriter writer = new BufferedWriter(new FileWriter("report/expected_report.txt"))){
+		try(BufferedWriter writer = new BufferedWriter(new FileWriter("report/report.txt"))){
 			writer.write(output);
 			writer.close();
 		}catch (IOException e) {
