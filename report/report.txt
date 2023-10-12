@@ -3,9 +3,9 @@
 		SUMMARY OF BOOKS
 GENRE						AMOUNT
 Adventure					12
-Fiction						11
+Fiction					11
 Classics					12
-Mystery						8
+Mystery					8
 Science Fiction					7
 ====================================================
 			TOTAL AMOUNT OF BOOKS	50
@@ -44,20 +44,20 @@ THE LITTLE PRINCE BY ANTOINE DE SAINT-EXUPURY
 
 		USERS THAT OWE BOOK FEES
 
-John Smith					1282.5
-Michael Johnson					711.5
-Susan Jones					274.0
-Sarah Wilson					968.0
-James Anderson					103.0
-Karen Lee					849.0
-Charles Martin					1258.5
-Joseph Clark					1026.0
-John Wright					847.5
-Karen Turner					512.5
-Daniel Young					389.5
-Kimberly Baker					58.0
+John Smith					$1282.50
+Michael Johnson					$711.50
+Susan Jones					$274.00
+Sarah Wilson					$968.00
+James Anderson					$103.00
+Karen Lee					$849.00
+Charles Martin					$1258.50
+Joseph Clark					$1026.00
+John Wright					$847.50
+Karen Turner					$512.50
+Daniel Young					$389.50
+Kimberly Baker					$58.00
 ====================================================
-				TOTAL DUE	$8280.0
+				TOTAL DUE	$8280.00
 
 
 
