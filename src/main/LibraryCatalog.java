@@ -362,14 +362,14 @@ public class LibraryCatalog {
 		output += "\t\t\t\tTOTAL DUE\t$" + (totalDueGeneral) + "\n\n\n";
 		output += "\n\n";
 
-		output += "My Own Test\n";
+		// output += "My Own Test\n";
 
-		output += bookCatalog.size() + "\n";
-		addBook("My Personal Biography", "G Bonilla", "Classics");
-		output += bookCatalog.size() + "\n";
-		Book epicBook1 = findBookById(getBookCatalog(), 51);
-		if(epicBook1 == null)
-			output += "Fail \n";
+		// output += bookCatalog.size() + "\n";
+		// addBook("My Personal Biography", "G Bonilla", "Classics");
+		// output += bookCatalog.size() + "\n";
+		// Book epicBook1 = findBookById(getBookCatalog(), 51);
+		// if(epicBook1 == null)
+		// 	output += "Fail \n";
 
 
 
