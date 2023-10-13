@@ -24,12 +24,15 @@ public class LibraryGUI extends JFrame {
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
+        getContentPane().setBackground(new Color(70, 130, 180));
 
         JPanel panel = new JPanel();
+        panel.setBackground(new Color(100, 149, 237));
         add(panel, BorderLayout.NORTH);
 
 
         JButton addButton = new JButton("Add Book");
+        addButton.setBackground(new Color(50, 205, 50));
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -43,6 +46,7 @@ public class LibraryGUI extends JFrame {
         panel.add(addButton);
 
         JButton removeButton = new JButton("Remove Book");
+        removeButton.setBackground(new Color(220, 20, 60));
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
