@@ -12,6 +12,8 @@ public class LibraryGUI extends JFrame {
     private final JList<String> bookList = new JList<>(bookListModel);
 
     public LibraryGUI() {
+        
+        //Create a new book catalog
         try {
             libraryCatalog = new LibraryCatalog();
         } catch (IOException e) {
@@ -19,8 +21,9 @@ public class LibraryGUI extends JFrame {
             JOptionPane.showMessageDialog(this, "Error loading catalog", "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(1);
         }
-
-        setTitle("Library Management System");
+        
+        // Add title, Set background, and dimensions
+        setTitle("Westside Public Library’s IT Department");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -31,6 +34,8 @@ public class LibraryGUI extends JFrame {
         add(panel, BorderLayout.NORTH);
 
 
+
+        // Add Books 
         JButton addButton = new JButton("Add Book");
         addButton.setBackground(new Color(50, 205, 50));
         addButton.addActionListener(new ActionListener() {
@@ -45,6 +50,8 @@ public class LibraryGUI extends JFrame {
         });
         panel.add(addButton);
 
+
+        // Remove books
         JButton removeButton = new JButton("Remove Book");
         removeButton.setBackground(new Color(220, 20, 60));
         removeButton.addActionListener(new ActionListener() {
@@ -57,11 +64,15 @@ public class LibraryGUI extends JFrame {
         });
         panel.add(removeButton);
 
+//---------------------------------------------------------------------
+        // Updates and run the program
         add(new JScrollPane(bookList), BorderLayout.CENTER);
-
         updateBookList();
     }
 
+	/**
+	 * Gets the books from the catalog, and update the bookListModel
+	 */
     private void updateBookList() {
         bookListModel.clear();
         bookListModel.addElement("BOOK ID: \tBOOK TITLE");
