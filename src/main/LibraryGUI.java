@@ -21,15 +21,13 @@ public class LibraryGUI extends JFrame {
         }
 
         setTitle("Library Management System");
-        setSize(400, 300);
+        setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
         JPanel panel = new JPanel();
         add(panel, BorderLayout.NORTH);
 
-        JTextField bookTitleInput = new JTextField(15);
-        panel.add(bookTitleInput);
 
         JButton addButton = new JButton("Add Book");
         addButton.addActionListener(new ActionListener() {
@@ -62,8 +60,9 @@ public class LibraryGUI extends JFrame {
 
     private void updateBookList() {
         bookListModel.clear();
+        bookListModel.addElement("BOOK ID: \tBOOK TITLE");
         for (Book book : libraryCatalog.getBookCatalog()) {
-            bookListModel.addElement(book.getId() + ": " + book.getTitle());
+            bookListModel.addElement("#"+book.getId() + ":" + book.getTitle());
         }
     }
 
