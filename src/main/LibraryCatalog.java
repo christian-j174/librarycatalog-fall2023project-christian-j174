@@ -386,11 +386,23 @@ public class LibraryCatalog {
 	 * other parts of the project.
 	 */
 	public List<Book> searchForBook(FilterFunction<Book> func) {
-		return null;
+		List<Book> filteredBooks = new ArrayList<>();
+		for (Book book : bookCatalog) {
+			if (func.filter(book)) {
+				filteredBooks.add(book);
+			}
+		}
+		return filteredBooks;
 	}
 	
 	public List<User> searchForUsers(FilterFunction<User> func) {
-		return null;
+		List<User> filteredUsers = new ArrayList<>();
+		for (User user : userList) {
+			if (func.filter(user)) {
+				filteredUsers.add(user);
+			}
+		}
+		return filteredUsers;
 	}
 	
 }
