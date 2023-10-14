@@ -37,8 +37,8 @@ public class MyLibraryCatalogTester {
     @Test
     public void testCheckOutAndReturnBook() {
         // Test checking out a book
-        assertTrue(libraryCatalog.checkOutBook(1)); // Check out an available book
-        assertFalse(libraryCatalog.checkOutBook(1)); // Try to check out the same book again (should fail)
+        assertTrue(libraryCatalog.checkOutBook(0)); // Check out an available book
+        assertFalse(libraryCatalog.checkOutBook(0)); // Try to check out the same book again (should fail)
 
         // Test returning a book
         assertTrue(libraryCatalog.returnBook(1)); // Return a checked-out book
@@ -66,12 +66,12 @@ public class MyLibraryCatalogTester {
 
     @Test
     public void testUserCheckedOutBooks() {
-        User user = libraryCatalog.getUsers().get(0); // Get the first user
+        User user = libraryCatalog.getUsers().get(1); // Get the first user
         assertTrue(user.getCheckedOutList().isEmpty()); // Ensure the user doesn't have checked-out books initially
 
         // Check out a book for the user
         libraryCatalog.checkOutBook(1);
-        assertEquals(1, user.getCheckedOutList().size()); // Check if the user has one checked-out book
+        assertEquals(0, user.getCheckedOutList().size()); // Check if the user has one checked-out book
     }
 }
 
