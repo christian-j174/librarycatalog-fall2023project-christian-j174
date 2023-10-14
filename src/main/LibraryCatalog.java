@@ -313,9 +313,9 @@ public class LibraryCatalog {
 		}
 
 		output += "Adventure\t\t\t\t\t" + (countAdeventure) + "\n";
-		output += "Fiction\t\t\t\t\t" + (countFiction) + "\n";
+		output += "Fiction\t\t\t\t\t\t" + (countFiction) + "\n";
 		output += "Classics\t\t\t\t\t" + (countClassics) + "\n";
-		output += "Mystery\t\t\t\t\t" + (countMystery) + "\n";
+		output += "Mystery\t\t\t\t\t\t" + (countMystery) + "\n";
 		output += "Science Fiction\t\t\t\t\t" + (countScienceFiction) + "\n";
 		output += "====================================================\n";
 		output += "\t\t\tTOTAL AMOUNT OF BOOKS\t" + (totalBook) + "\n\n";
